@@ -2,14 +2,20 @@
 {{if .Success}}
     <h1>Successfully submitted</h1>
 {{else}}
-    <h1>Contact</h1>
+    <h1>Create new patient record</h1>
     <form method="POST">
-        <label>role:</label><br />
-        <input type="text" name="role"><br />
-        <label>gender:</label><br />
-        <input type="text" name="gender"><br />
+        <label>patient_id:</label><br />
+        <input type="text" name="pid"><br /><br />
+        <span>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label><br />
+        </span><br /><br />
         <label>year of diagnosis:</label><br />
-        <textarea name="diagnosis"></textarea><br />
+        <textarea name="diagnosis"></textarea><br /><br />
         <input type="submit">
     </form>
 {{end}}
