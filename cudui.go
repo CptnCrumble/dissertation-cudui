@@ -20,9 +20,8 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", landingPage())
-
-	// new user
 	r.HandleFunc("/new_user", newUser(pgAdaptor))
+	// r.HandleFunc("/new_nms", newNms(pgAdaptor))
 	serve(r)
 }
 
@@ -49,7 +48,7 @@ func landingPage() func(w http.ResponseWriter, r *http.Request) {
 
 func newUser(url string) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		tmpl := template.Must(template.ParseFiles("newuser.html"))
+		tmpl := template.Must(template.ParseFiles("forms/newuser.html"))
 		if r.Method != http.MethodPost {
 			tmpl.Execute(w, nil)
 			return
@@ -79,3 +78,13 @@ func newUser(url string) func(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+// func newNms(url string) func(w http.ResponseWriter, r *http.Request) {
+// 	return func(w http.ResponseWriter, r *http.Request) {
+// 		tmpl := template.Must(template.ParseFiles("newuser.html"))
+// 		if r.Method != http.MethodPost {
+// 			tmpl.Execute(w, nil)
+// 			return
+// 		}
+// 	}
+// }
