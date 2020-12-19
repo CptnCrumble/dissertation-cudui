@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -92,6 +93,19 @@ func newNms(url string) func(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(string(j))
 
 		// POST to pgAdaptor
+		body := bytes.NewBuffer(j)
+		api := fmt.Sprintf("%s/new_nms", url)
+		response, err := http.Post(api, "application/json", body)
 
+		if err != nil {
+			fmt.Print("POST request failed")
+			panic(err)
+		}
+
+		if response.StatusCode == 200 {
+			tmpl.Execute(w, struct{ Success bool }{true})
+		} else {
+			fmt.Printf("non-200 response code")
+		}
 	}
 }

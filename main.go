@@ -16,7 +16,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", landingPage())
-	r.HandleFunc("/new_user", newPatient(pgAdaptor))
+	r.HandleFunc("/new_patient", newPatient(pgAdaptor))
 	r.HandleFunc("/new_nms", newNms(pgAdaptor))
 	serve(r)
 }

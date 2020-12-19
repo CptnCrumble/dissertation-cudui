@@ -34,7 +34,7 @@ func newPatient(url string) func(w http.ResponseWriter, r *http.Request) {
 		fmt.Print(string(j))
 
 		body := bytes.NewBuffer(j)
-		api := fmt.Sprintf("%s/new_user", url)
+		api := fmt.Sprintf("%s/new_patient", url)
 		response, err := http.Post(api, "application/json", body)
 
 		if err != nil {
