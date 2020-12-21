@@ -93,22 +93,21 @@ func newNms(url string) func(w http.ResponseWriter, r *http.Request) {
 		nms31, _ := strconv.ParseBool(r.FormValue("nms31"))
 
 		j, _ := json.Marshal(nmsForm{pid, aNumber, aDate, nms1, nms2, nms3, nms4, nms5, nms6, nms7, nms8, nms9, nms10, nms11, nms12, nms13, nms14, nms15, nms16, nms17, nms18, nms19, nms20, nms21, nms22, nms23, nms24, nms25, nms26, nms27, nms28, nms29, nms30, nms31})
-		fmt.Print(string(j))
 
 		// POST to pgAdaptor
 		body := bytes.NewBuffer(j)
 		api := fmt.Sprintf("%s/new_nms", url)
 		response, err := http.Post(api, "application/json", body)
+		redisLogger(fmt.Sprintf("POSTed new nms with %s", string(j)))
 
 		if err != nil {
-			fmt.Print("POST request failed")
-			panic(err)
+			redisLogger(fmt.Sprintf("newNms() POST failed -- %s", err.Error()))
 		}
 
 		if response.StatusCode == 200 {
 			tmpl.Execute(w, struct{ Success bool }{true})
 		} else {
-			fmt.Printf("non-200 response code")
+			redisLogger(fmt.Sprintf("newNms() recieved response code of %d", response.StatusCode))
 		}
 	}
 }

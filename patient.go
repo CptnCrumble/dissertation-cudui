@@ -34,21 +34,20 @@ func newPatient(url string) func(w http.ResponseWriter, r *http.Request) {
 
 		j, _ := json.Marshal(patient{pid, "anon", "anon", gender, diagnosis})
 
-		fmt.Print(string(j))
+		redisLogger(fmt.Sprintf("POSTed new patient with %s", string(j)))
 
 		body := bytes.NewBuffer(j)
 		api := fmt.Sprintf("%s/new_patient", url)
 		response, err := http.Post(api, "application/json", body)
 
 		if err != nil {
-			fmt.Print("POST request failed")
-			panic(err)
+			redisLogger(fmt.Sprintf("newPatient POST request failed -- %s", err.Error()))
 		}
 
 		if response.StatusCode == 200 {
 			tmpl.Execute(w, struct{ Success bool }{true})
 		} else {
-			fmt.Printf("non-200 response code")
+			redisLogger(fmt.Sprintf("newPatient() recieved response code of %d", response.StatusCode))
 		}
 	}
 }
