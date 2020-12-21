@@ -9,15 +9,6 @@ import (
 	"strconv"
 )
 
-type dropdownItem struct {
-	Value int
-}
-
-type formData struct {
-	Success bool
-	Pids    []int
-}
-
 type nmsForm struct {
 	Pid              int
 	AssessmentNumber string
@@ -55,8 +46,10 @@ type nmsForm struct {
 	Nms31            bool
 }
 
-func newNms(url string, patients []int) func(w http.ResponseWriter, r *http.Request) {
+func newNms(url string) func(w http.ResponseWriter, r *http.Request) {
+
 	return func(w http.ResponseWriter, r *http.Request) {
+		patients := getPids(url)
 
 		tmpl := template.Must(template.ParseFiles("forms/newnms.html"))
 		if r.Method != http.MethodPost {

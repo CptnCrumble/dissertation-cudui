@@ -15,20 +15,17 @@ func main() {
 
 	pgAdaptor := os.Getenv("URL_PG_ADAPTOR")
 	// needs a loop to wait for PG-adaptor to be up
-	p, err1 := http.Get(fmt.Sprintf("%s/users", pgAdaptor))
-	if err1 != nil {
-		fmt.Print("get all pids failed")
-	}
-
-	var pids []int
-	json.NewDecoder(p.Body).Decode(&pids)
-	fmt.Print(pids)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/", landingPage())
 	r.HandleFunc("/new_patient", newPatient(pgAdaptor))
-	r.HandleFunc("/new_nms", newNms(pgAdaptor, pids))
+	r.HandleFunc("/new_nms", newNms(pgAdaptor))
 	serve(r)
+}
+
+type formData struct {
+	Success bool
+	Pids    []int
 }
 
 func serve(router *mux.Router) {
@@ -42,4 +39,15 @@ func landingPage() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "landing page")
 	}
+}
+
+func getPids(url string) []int {
+	p, err1 := http.Get(fmt.Sprintf("%s/users", url))
+	if err1 != nil {
+		fmt.Print("get all pids failed")
+	}
+
+	var pids []int
+	json.NewDecoder(p.Body).Decode(&pids)
+	return pids
 }

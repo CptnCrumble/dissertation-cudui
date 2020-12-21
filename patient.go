@@ -18,10 +18,13 @@ type patient struct {
 }
 
 func newPatient(url string) func(w http.ResponseWriter, r *http.Request) {
+
 	return func(w http.ResponseWriter, r *http.Request) {
+		patients := getPids(url)
+
 		tmpl := template.Must(template.ParseFiles("forms/newuser.html"))
 		if r.Method != http.MethodPost {
-			tmpl.Execute(w, nil)
+			tmpl.Execute(w, formData{false, patients})
 			return
 		}
 
