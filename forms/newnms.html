@@ -2,6 +2,7 @@
     <style>
         radio {
             display: inline;
+            transform: scale(2);
         }
     </style>
 </head>
@@ -13,7 +14,12 @@
     <h1>Create new Non Movement Symptoms record</h1>
     <form method="POST">
         <label>patient_id:</label><br />
-        <input type="text" name="pid"><br /><br />
+        <!-- <input type="text" name="pid"><br /><br /> -->
+        <select name="pid">
+            {{range .Pids}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select><br /><br />
         <label>assessment_number:</label><br />
         <input type="text" name="assessment_number"><br /><br />
         <label>assessment_date:</label><br />
