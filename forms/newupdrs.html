@@ -1,0 +1,121 @@
+<head>
+    <style>
+        radio {
+            display: inline;
+            transform: scale(2);
+        }
+    </style>
+</head>
+
+<!-- forms.html -->
+{{if .Success}}
+    <h1>Successfully submitted</h1>
+{{else}}
+    <h1>Create new Unified Parkinsons Disease Rating Scale record</h1>
+    <form method="POST">
+        <label>patient_id:</label><br />
+        <!-- <input type="text" name="pid"><br /><br /> -->
+        <select name="pid">
+            {{range .Pids}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select><br /><br />
+        <label>assessment_number:</label><br />
+        <input type="text" name="assessment_number"><br /><br />
+        <label>assessment_date:</label><br />
+        <input type="date" name="assessment_date"><br /><br />        
+        <span>
+            <p>2.1 - Have you had problems with your speech?</p>
+            <select name="speech">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.2 - Have you usually had too much saliva...?</p>
+            <select name="saliva">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.3 - Have you had problems swallowing pills or eating meals?...</p>
+            <select name="chewing">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.4 - Have you had trouble eating your food or using utensils?</p>
+            <select name="eating">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.5 - Have you had problems dressing?</p>
+            <select name="dressing">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.6 - Have you been slow or do you need help with personal hygiene?</p>
+            <select name="hygiene">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.7 - Have people had trouble reading your handwriting?</p>
+            <select name="handwriting">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.8 - Have you had trouble doing your hobbies?</p>
+            <select name="hobbies">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+        <span>
+            <p>2.9 - Do you have trouble turning over in bed?</p>
+            <select name="turning">
+                <option value="0">0: Normal</option>
+                <option value="1">1: Slight</option>
+                <option value="2">2: Mild</option>
+                <option value="3">3: Moderate</option>
+                <option value="4">4: Severe</option>
+            </select>
+        </span><br /><br /> 
+
+
+        <input type="submit">
+    </form>
+{{end}}

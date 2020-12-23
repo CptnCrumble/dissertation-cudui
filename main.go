@@ -23,6 +23,7 @@ func main() {
 	r.HandleFunc("/", landingPage())
 	r.HandleFunc("/new_patient", newPatient(pgAdaptor))
 	r.HandleFunc("/new_nms", newNms(pgAdaptor))
+	r.HandleFunc("/new_updrs", newUpdrs(pgAdaptor))
 	serve(r)
 }
 
