@@ -22,9 +22,11 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", landingPage())
 	r.HandleFunc("/new_patient", newPatient(pgAdaptor))
+	r.HandleFunc("/new_carer", newCarer(pgAdaptor))
 	r.HandleFunc("/new_nms", newNms(pgAdaptor))
 	r.HandleFunc("/new_updrs", newUpdrs(pgAdaptor))
 	r.HandleFunc("/new_pdq39", newpdq39(pgAdaptor))
+
 	serve(r)
 }
 
@@ -83,4 +85,21 @@ func getPids(url string) []int {
 	var pids []int
 	json.NewDecoder(p.Body).Decode(&pids)
 	return pids
+}
+
+func getCids(url string) []int {
+	c, err1 := http.Get(fmt.Sprintf("%s/carers", url))
+	if err1 != nil {
+		redisLogger(fmt.Sprintf("get all cids failed -- %s", err1.Error()))
+		// return large array to prevent submission
+		x := make([]int, 999)
+		for i, v := range x {
+			x[i] = i + v
+		}
+		return x
+	}
+
+	var cids []int
+	json.NewDecoder(c.Body).Decode(&cids)
+	return cids
 }

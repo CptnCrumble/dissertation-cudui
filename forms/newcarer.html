@@ -1,0 +1,50 @@
+<!-- forms.html -->
+{{if .Success}}
+    <h1>Successfully submitted</h1>
+{{else}}
+    <h1>Create new carer record</h1>
+    <form method="POST">
+        <label>carer_id:</label><br />
+        <input type="text" name="cid" id ="cid"><br />  
+        <p id="warning" style="display: none; color: red;">CARER ID ALREADY EXISTS</p><br />
+        
+        <label>patient_id:</label><br />
+        <!-- <input type="text" name="pid"><br /><br /> -->
+        <select name="pid">
+            {{range .Pids}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select><br /><br />
+
+        <label>Relationship</label><br />
+        <input type="text" name="relationship"><br /><br />
+        <input type="submit" id="submit">
+    </form>    
+    
+    <p id="existingCids" style="display: none;">{{.Cids}}</p>
+
+    <script>
+        const input = document.getElementById("cid");
+        const warn = document.getElementById('warning');
+        const cids = document.getElementById("existingCids").innerHTML;
+        const submit = document.getElementById("submit");
+
+        input.addEventListener('change', updateValue);
+
+        function updateValue(e) {
+            console.log("called");
+            console.log(cids);
+            x = e.target.value;
+            console.log(x)
+            if (cids.includes(x)) {                
+                warn.style.display = "block";
+                submit.disabled = true;
+                console.log("BAD");      
+            } else {
+                warn.style.display = "none";
+                submit.disabled = false;
+                console.log("GOOD");
+            }        
+        }
+    </script>
+{{end}}
