@@ -26,6 +26,7 @@ func main() {
 	r.HandleFunc("/new_nms", newNms(pgAdaptor))
 	r.HandleFunc("/new_updrs", newUpdrs(pgAdaptor))
 	r.HandleFunc("/new_pdq39", newpdq39(pgAdaptor))
+	r.HandleFunc("/new_pdqc", newpdqc(pgAdaptor))
 
 	serve(r)
 }
