@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -67,7 +68,9 @@ func redisLogger(message string) {
 
 func landingPage() func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "landing page")
+		b, _ := ioutil.ReadFile("./static/index.html")
+		page := string(b)
+		fmt.Fprintf(w, page)
 	}
 }
 
