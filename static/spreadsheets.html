@@ -1,0 +1,57 @@
+<html>
+<head>
+    <style>
+        radio {
+            display: inline;
+            transform: scale(2);
+        }
+    </style>
+</head>
+<body>
+    <p><a href="/">Return to HOME screen</a></p>
+    <h1>Download a spreadsheet summary</h1>
+    <label>Spreadsheet</label>
+    <select name="xlsx">
+        <option value="pdq39">Patient summary PDQ-39</option>
+    </select><br /><br />
+
+    <label>patient_id:</label><br />
+    <select id="pid">
+        {{range .Pids}}
+        <option value="{{.}}">{{.}}</option>
+        {{end}}
+    </select><br /><br />
+
+    <button name="download" onclick="getSpready()">Download</button>
+
+    <p id="xlsxFactoryUrl" style="display: none;">{{.XlsxFactoryURL}}</p>
+</body>
+<script>
+    const url = document.getElementById("xlsxFactoryUrl").innerText
+    console.log(url)
+
+    // In time replace below with switch statement for value of spreadsheet selector
+    var path = "/pdq39/data?pid=" 
+
+    // Set up re-direct for Download button
+    var base = url + path;
+    var redirect = base + "1";
+    const input = document.getElementById("pid");
+
+    input.addEventListener('change', updateValue);
+
+    function updateValue(e) {
+        console.log("called");
+        x = e.target.value;
+        console.log(x)
+        redirect = base + x;
+        console.log(redirect)
+    }
+    
+    //redirect upon button press
+    function getSpready() {
+        window.location.href = redirect;
+    }
+</script>
+
+</html>
