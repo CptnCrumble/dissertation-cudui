@@ -21,7 +21,8 @@ func main() {
 	// ^ perhaps use k8's config to determine this
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", landingPage())
+	r.HandleFunc("/", landingPage(pgAdaptor))
+	r.HandleFunc("/login", login(pgAdaptor))
 	r.HandleFunc("/new_patient", newPatient(pgAdaptor))
 	r.HandleFunc("/new_carer", newCarer(pgAdaptor))
 	r.HandleFunc("/new_nms", newNms(pgAdaptor))
@@ -67,11 +68,42 @@ func redisLogger(message string) {
 	}
 }
 
-func landingPage() func(w http.ResponseWriter, r *http.Request) {
+func authCheck(r http.Request) bool {
+	cookie, _ := r.Cookie("PCP")
+	if cookie != nil {
+		authkey := authKey()
+		if cookie.Value == authkey {
+			return true
+		}
+	}
+
+	return false
+}
+
+func authKey() string {
+	redisLocation := fmt.Sprintf("%s:6379", os.Getenv("REDIS_HOST"))
+	conn, _ := redis.Dial("tcp", redisLocation)
+
+	value, err2 := redis.String(conn.Do("GET", "authkey"))
+	if err2 != nil {
+		log.Print(err2)
+		// backup in case redis is down for pro-longed period
+		return "654651321deadredis6549876513213x"
+	}
+
+	return value
+}
+
+func landingPage(url string) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		b, _ := ioutil.ReadFile("./static/index.html")
-		page := string(b)
-		fmt.Fprintf(w, page)
+
+		if authCheck(*r) {
+			b, _ := ioutil.ReadFile("./static/index.html")
+			page := string(b)
+			fmt.Fprintf(w, page)
+		} else {
+			http.Redirect(w, r, "/login", http.StatusNetworkAuthenticationRequired)
+		}
 	}
 }
 

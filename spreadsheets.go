@@ -13,10 +13,14 @@ type spreadSheetPage struct {
 
 func spreadSheets(url string) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		patients := getPids(url)
-		urlXf := os.Getenv("URL_XLSX_FACTORY")
+		if !authCheck(*r) {
+			http.Redirect(w, r, "/login", http.StatusNetworkAuthenticationRequired)
+		} else {
+			patients := getPids(url)
+			urlXf := os.Getenv("URL_XLSX_FACTORY")
 
-		tmpl := template.Must(template.ParseFiles("static/spreadsheets.html"))
-		tmpl.Execute(w, spreadSheetPage{patients, urlXf})
+			tmpl := template.Must(template.ParseFiles("static/spreadsheets.html"))
+			tmpl.Execute(w, spreadSheetPage{patients, urlXf})
+		}
 	}
 }

@@ -1,0 +1,16 @@
+<!-- forms.html -->
+{{if .Success}}
+    <h1>Welcome to PCP system. </h1>
+    <p><a href="/">Go to HOME screen</a></p>
+{{else}}
+    <h1>PCP system Login</h1>
+    <form method="POST">
+        <label>username</label><br />
+        <input type="text" name="uname" ><br /><br />    
+        
+        <label>password</label><br />
+        <input type="password" name="pword" ><br /><br />    
+
+        <input type="submit" value="Log in">
+    </form>
+{{end}}
