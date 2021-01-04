@@ -13,15 +13,15 @@ type updrsForm struct {
 	Pid              int
 	AssessmentNumber string
 	AssessmentDate   string
-	Speech           int
-	Saliva           int
-	Chewing          int
-	Eating           int
-	Dressing         int
-	Hygiene          int
-	Handwriting      int
-	Hobbies          int
-	Turning          int
+	Speech           string
+	Saliva           string
+	Chewing          string
+	Eating           string
+	Dressing         string
+	Hygiene          string
+	Handwriting      string
+	Hobbies          string
+	Turning          string
 }
 
 func newUpdrs(url string) func(w http.ResponseWriter, r *http.Request) {
@@ -40,15 +40,15 @@ func newUpdrs(url string) func(w http.ResponseWriter, r *http.Request) {
 			pid, _ := strconv.Atoi(r.FormValue("pid"))
 			aNumber := r.FormValue("assessment_number")
 			aDate := r.FormValue("assessment_date")
-			speech, _ := strconv.Atoi(r.FormValue("speech"))
-			saliva, _ := strconv.Atoi(r.FormValue("saliva"))
-			chewing, _ := strconv.Atoi(r.FormValue("chewing"))
-			eating, _ := strconv.Atoi(r.FormValue("eating"))
-			dressing, _ := strconv.Atoi(r.FormValue("dressing"))
-			hygiene, _ := strconv.Atoi(r.FormValue("hygiene"))
-			handwriting, _ := strconv.Atoi(r.FormValue("handwriting"))
-			hobbies, _ := strconv.Atoi(r.FormValue("hobbies"))
-			turning, _ := strconv.Atoi(r.FormValue("turning"))
+			speech := r.FormValue("speech")
+			saliva := r.FormValue("saliva")
+			chewing := r.FormValue("chewing")
+			eating := r.FormValue("eating")
+			dressing := r.FormValue("dressing")
+			hygiene := r.FormValue("hygiene")
+			handwriting := r.FormValue("handwriting")
+			hobbies := r.FormValue("hobbies")
+			turning := r.FormValue("turning")
 
 			j, _ := json.Marshal(updrsForm{pid, aNumber, aDate, speech, saliva, chewing, eating, dressing, hygiene, handwriting, hobbies, turning})
 
