@@ -29,6 +29,7 @@ func main() {
 	r.HandleFunc("/new_updrs", newUpdrs(pgAdaptor))
 	r.HandleFunc("/new_pdq39", newpdq39(pgAdaptor))
 	r.HandleFunc("/new_pdqc", newpdqc(pgAdaptor))
+	r.HandleFunc("/new_pdq8", newpdq8(pgAdaptor))
 	r.HandleFunc("/spreadsheets", spreadSheets(pgAdaptor))
 
 	serve(r)

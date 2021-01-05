@@ -1,0 +1,125 @@
+<head>
+    <style>
+        radio {
+            display: inline;
+            transform: scale(2);
+        }
+    </style>
+</head>
+<p><a href="/">Return to HOME screen</a></p>
+<!-- forms.html -->
+{{if .Success}}
+    <h1>Successfully submitted</h1>
+{{else}}
+    <h1>Create new PDQ-8 record</h1>
+    <form method="POST">
+        <label>patient_id:</label><br />
+        <!-- <input type="text" name="pid"><br /><br /> -->
+        <select name="pid">
+            {{range .Pids}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select><br /><br />
+        <label>assessment_number:</label><br />
+        <input type="text" name="assessment_number"><br /><br />
+        <label>assessment_date:</label><br />
+        <input type="date" name="assessment_date"><br /><br /> 
+        <span>
+            <p>1 - Had difficulty getting around in public?</p>
+            <select name="1">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>2 - Had difficulty dressing yourself?</p>
+            <select name="2">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>3 - Felt depressed?</p>
+            <select name="3">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>4 - Had problems with your close personal relationships?</p>
+            <select name="4">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>5 - Had problems with your concentration?</p>
+            <select name="5">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>6 - Felt unable to communicate with people properly?</p>
+            <select name="6">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>7 - Had painful muscle cramps or spasms?</p>
+            <select name="7">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+            
+            <span>
+            <p>8 - Felt embarrassed in public due to having Parkinson’s disease?</p>
+            <select name="8">
+            <option value="NO VALUE">- No response</option>
+            <option value="0">0: Never</option>
+            <option value="1">1: Ocasionally</option>
+            <option value="2">2: Sometimes</option>
+            <option value="3">3: Often</option>
+            <option value="4">4: Always or Cannot do at all</option>
+            </select>
+            </span><br /><br />
+
+        <input type="submit">
+    </form>
+{{end}}
