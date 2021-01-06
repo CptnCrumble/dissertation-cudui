@@ -1,0 +1,171 @@
+<head>
+    <style>
+        radio {
+            display: inline;
+            transform: scale(2);
+        }
+    </style>
+</head>
+<p><a href="/">Return to HOME screen</a></p>
+<!-- forms.html -->
+{{if .Success}}
+    <h1>Successfully submitted</h1>
+{{else}}
+    <h1>Create new HADS record</h1>
+    <form method="POST">
+        <label>patient_id:</label><br />
+        <!-- <input type="text" name="pid"><br /><br /> -->
+        <select name="pid">
+            {{range .Pids}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select><br /><br />
+        <label>assessment_number:</label><br />
+        <input type="text" name="assessment_number"><br /><br />
+        <label>assessment_date:</label><br />
+        <input type="date" name="assessment_date"><br /><br /> 
+        <span>
+            <p>I feel tense or ‘wound up’:</p>
+            <select name="tense">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I still enjoy the things I used to enjoy:</p>
+            <select name="enjoy">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I get a sort of frightened feeling as if something awful is about to happen:</p>
+            <select name="fright">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I can laugh and see the funny side of things:</p>
+            <select name="laugh">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>Worrying thoughts go through my mind:</p>
+            <select name="worry">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I feel cheerful:</p>
+            <select name="cheer">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I can sit at ease and feel relaxed:</p>
+            <select name="ease">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I feel as if I am slowed down:</p>
+            <select name="slow">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I get a frightened feeling like butterflies in my stomach:</p>
+            <select name="butterfly">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I have lost interest in my appearance:</p>
+            <select name="interest">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I feel restless as I have to be on the move:</p>
+            <select name="restless">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I look forward with enjoyment to things:</p>
+            <select name="forward">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I get sudden feelings of panic:</p>
+            <select name="panic">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+        <span>
+            <p>I can enjoy a good book:</p>
+            <select name="book">
+            <option value="NO VALUE">- No response</option>
+            <option value="0"> 0 </option>
+            <option value="1"> 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            </select>
+        </span><br /><br />
+            
+           
+        <input type="submit">
+    </form>
+{{end}}
