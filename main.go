@@ -32,6 +32,7 @@ func main() {
 	r.HandleFunc("/new_pdq8", newpdq8(pgAdaptor))
 	r.HandleFunc("/new_hads", newHads(pgAdaptor))
 	r.HandleFunc("/new_pdss", newPdss(pgAdaptor))
+	r.HandleFunc("/new_pkg", newPkg(pgAdaptor))
 	r.HandleFunc("/spreadsheets", spreadSheets(pgAdaptor))
 
 	serve(r)

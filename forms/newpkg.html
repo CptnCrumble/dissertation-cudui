@@ -1,0 +1,50 @@
+<head>
+    <style>
+        radio {
+            display: inline;
+            transform: scale(2);
+        }
+    </style>
+</head>
+<p><a href="/">Return to HOME screen</a></p>
+<!-- forms.html -->
+{{if .Success}}
+    <h1>Successfully submitted</h1>
+{{else}}
+    <h1>Create new PKG record</h1>
+    <form method="POST">
+        <label>patient_id:</label><br />
+        <!-- <input type="text" name="pid"><br /><br /> -->
+        <select name="pid">
+            {{range .Pids}}
+            <option value="{{.}}">{{.}}</option>
+            {{end}}
+        </select><br /><br />
+        <label>assessment_number:</label><br />
+        <input type="text" name="assessment_number"><br /><br />
+
+        <label>assessment_date:</label><br />
+        <input type="date" name="assessment_date"><br /><br /> 
+        
+        <label>session duration</label><br />
+        <input type="text" name="duration"><br /><br /> 
+
+        <label>BKS</label><br />
+        <input type="text" name="bks"><br /><br /> 
+
+        <label>DKS</label><br />
+        <input type="text" name="dks"><br /><br /> 
+
+        <label>FDS</label><br />
+        <input type="text" name="fds"><br /><br /> 
+
+        <label>PTI</label><br />
+        <input type="text" name="pti"><br /><br /> 
+
+        <label>PTT</label><br />
+        <input type="text" name="ptt"><br /><br /> 
+
+
+        <input type="submit">
+    </form>
+{{end}}

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 )
@@ -64,6 +65,9 @@ func newpdq8(url string) func(w http.ResponseWriter, r *http.Request) {
 				tmpl.Execute(w, struct{ Success bool }{true})
 			} else {
 				redisLogger(fmt.Sprintf("newPdq8() recieved response code of %d", response.StatusCode))
+				b, _ := ioutil.ReadFile("./static/badsubmission.html")
+				page := string(b)
+				fmt.Fprintf(w, page)
 			}
 		}
 
