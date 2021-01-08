@@ -86,12 +86,18 @@ func authCheck(r http.Request) bool {
 
 func authKey() string {
 	redisLocation := fmt.Sprintf("%s:6379", os.Getenv("REDIS_HOST"))
-	conn, _ := redis.Dial("tcp", redisLocation)
+	conn, err := redis.Dial("tcp", redisLocation)
+	if err != nil {
+		log.Print(err)
+		return "654651321deadredis6549876513213x"
+	}
+
+	// backup in case redis is down for pro-longed period
+	// var value string
 
 	value, err2 := redis.String(conn.Do("GET", "authkey"))
 	if err2 != nil {
 		log.Print(err2)
-		// backup in case redis is down for pro-longed period
 		return "654651321deadredis6549876513213x"
 	}
 
