@@ -16,7 +16,9 @@ import (
 
 func main() {
 
-	pgAdaptor := os.Getenv("URL_PG_ADAPTOR")
+	pgHost := os.Getenv("PG_ADAPTER_SERVICE_SERVICE_HOST")
+	pgPort := os.Getenv("PG_ADAPTER_SERVICE_SERVICE_PORT")
+	pgAdaptor := fmt.Sprintf("http://%s:%s", pgHost, pgPort)
 	// needs a loop to wait for PG-adaptor to be up
 	// ^ perhaps use k8's config to determine this
 
